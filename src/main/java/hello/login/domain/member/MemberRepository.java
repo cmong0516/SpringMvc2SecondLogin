@@ -35,4 +35,8 @@ public class MemberRepository {
     public List<Member> findAll() {
         return memberRepositoryIF.findAll();
     }
+
+    public void clearStroe() {
+        memberRepositoryIF.deleteAll();
+    }
 }

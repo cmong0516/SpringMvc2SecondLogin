@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -32,7 +33,8 @@ public class ItemController {
 
     @GetMapping("/{itemId}")
     public String item(@PathVariable long itemId, Model model) {
-        Item item = itemRepository.findById(itemId);
+        Optional<Item> byId = itemRepository.findById(itemId);
+        Item item = byId.get();
         model.addAttribute("item", item);
         return "items/item";
     }
@@ -73,7 +75,7 @@ public class ItemController {
 
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
-        Item item = itemRepository.findById(itemId);
+        Item item = itemRepository.findById(itemId).get();
         model.addAttribute("item", item);
         return "items/editForm";
     }
