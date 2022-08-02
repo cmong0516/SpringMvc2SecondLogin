@@ -6,10 +6,7 @@ import hello.login.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,7 +18,8 @@ public class MemberController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/add")
-    public String addForm(@ModelAttribute Member member) {
+    @ResponseBody
+    public String addForm() {
         return "members/addMemberForm";
     }
 
