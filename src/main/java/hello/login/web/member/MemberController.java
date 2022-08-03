@@ -18,13 +18,12 @@ public class MemberController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/add")
-    @ResponseBody
-    public String addForm() {
+    public String addForm(@ModelAttribute("member") Member member) {
         return "members/addMemberForm";
     }
 
     @PostMapping("/add")
-    public String save(@Valid @ModelAttribute Member member, BindingResult result) {
+    public String save(@Valid @ModelAttribute("member") Member member, BindingResult result) {
         if (result.hasErrors()) {
             return "members/addMemberForm";
         }

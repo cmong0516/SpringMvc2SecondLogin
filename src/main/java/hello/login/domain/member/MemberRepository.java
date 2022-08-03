@@ -15,14 +15,11 @@ import java.util.Optional;
 @Transactional
 public class MemberRepository {
 
-    private static long sequence = 0L;
-
     private final EntityManager em;
 
     private final MemberRepositoryIF memberRepositoryIF;
 
     public Member save(Member member) {
-        member.setId(++sequence);
         log.info("save: member = {}", member);
         em.persist(member);
         return member;

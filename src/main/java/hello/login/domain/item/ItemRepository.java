@@ -4,19 +4,20 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Repository
 @AllArgsConstructor
+@Transactional
 public class ItemRepository {
 
 //    private static final Map<Long, Item> store = new HashMap<>(); //static
-    private static long sequence = 0L; //static
     private final EntityManager em;
     private ItemRepositoryIF itemRepositoryIF;
 
     public Item save(Item item) {
-        item.setId(++sequence);
+//        item.setId(++sequence);
 //        store.put(item.getId(), item);
         em.persist(item);
         return item;
