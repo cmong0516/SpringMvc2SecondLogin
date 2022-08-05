@@ -3,18 +3,13 @@ package hello.login.web;
 import hello.login.domain.member.Member;
 import hello.login.domain.member.MemberRepository;
 import hello.login.domain.member.MemberRepositoryIF;
+import hello.login.web.argumentresolver.Login;
 import hello.login.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -74,15 +69,26 @@ public class HomeController {
 //        return "loginHome";
 //    }
 
-    @GetMapping("/")
-    public String homeLoginV3(@SessionAttribute(name = "loginMember",required = false) Member loginMember, Model model) {
-//        HttpSession session = request.getSession(false);
-//        if (session == null) {
+//    @GetMapping("/")
+//    public String homeLoginV3(@SessionAttribute(name = "loginMember",required = false) Member loginMember, Model model) {
+////        HttpSession session = request.getSession(false);
+////        if (session == null) {
+////            return "home";
+////        }
+//
+////        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+//
+//        if (loginMember == null) {
 //            return "home";
 //        }
+//
+//        model.addAttribute("member", loginMember);
+//        return "loginHome";
+//    }
+    // Login 여부를 애노테이션 으로 만들어서 작성할 것이다.
 
-//        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-
+    @GetMapping("/")
+    public String homeLoginArgumentResolver(@Login Member loginMember, Model model) {
         if (loginMember == null) {
             return "home";
         }
